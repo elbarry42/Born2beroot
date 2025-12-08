@@ -148,13 +148,13 @@ sudo crontab -e
 
 Through this project, you learn how to:
 
-✅ Install and manage a Linux server
-✅ Configure encrypted storage with LVM
-✅ Apply strict security and password policies
-✅ Harden sudo and SSH access
-✅ Use firewalls (UFW / firewalld)
-✅ Write automated Bash scripts
-✅ Understand SELinux/AppArmor basics
+✅ Install and manage a Linux server <br>
+✅ Configure encrypted storage with LVM <br>
+✅ Apply strict security and password policies <br>
+✅ Harden sudo and SSH access <br>
+✅ Use firewalls (UFW / firewalld) <br>
+✅ Write automated Bash scripts <br>
+✅ Understand SELinux/AppArmor basics <br>
 ✅ Work like a real system administrator
 
 ---
@@ -196,13 +196,6 @@ Through this project, you learn how to:
 * UFW & firewalld documentation
 * LVM official guides
 * Bash manual pages
-
----
-
-## 🤖 AI Usage
-
-AI was used **only** to help structure and write this README in a clear, readable format.
-All system configuration and scripting were done manually.
 
 ---
 
