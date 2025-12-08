@@ -1,5 +1,11 @@
 # Born2beRoot – Building a Secure Linux Server from Scratch 🐧🔐
 
+<div align="center">
+
+<a>![42 Badge](https://github.com/elbarry42/elbarry42/blob/main/42_badges/born2beroote.png)</a>
+
+</div>
+
 Welcome to **Born2beRoot**! 🎉 This system administration project focuses on creating, configuring, and securing a fully functional Linux server inside a virtual machine. It offers an essential introduction to virtualization, server management, security hardening, scripting, and core DevOps concepts.
 
 ---
