@@ -1,61 +1,78 @@
+*This project has been created as part of the 42 curriculum by elbarry.*
+
 # Born2beRoot – Building a Secure Linux Server from Scratch 🐧🔐
 
 <div align="center">
 
-<a>![42 Badge](https://github.com/elbarry42/elbarry42/blob/main/42_badges/born2beroote.png)</a>
+![42 Badge](https://github.com/elbarry42/elbarry42/blob/main/42_badges/born2beroote.png)
 
 </div>
 
-Welcome to **Born2beRoot**! 🎉 This system administration project focuses on creating, configuring, and securing a fully functional Linux server inside a virtual machine. It offers an essential introduction to virtualization, server management, security hardening, scripting, and core DevOps concepts.
+Welcome to **Born2beRoot**! 🎉
+This system administration project introduces the fundamentals of **virtualization**, **Linux server setup**, and **security hardening** by building a fully functional and secure server from scratch.
 
 ---
 
-## 📝 Project Overview
+## 📝 Description
 
-Born2beRoot consists of installing a minimal Debian or Rocky Linux system, securing it, and configuring essential services without relying on any graphical interface.
+**Born2beRoot** aims to teach the basics of system administration by guiding students through the installation, configuration, and securing of a Linux operating system inside a virtual machine.
 
-The project includes:
+The project focuses on:
 
-* Setting up encrypted partitions with **LVM**
-* Configuring users, password policies, and sudo restrictions
-* Securing SSH access on a custom port
-* Enforcing a firewall
-* Writing a system monitoring script that broadcasts real-time data
+* Understanding how a Linux server works internally
+* Applying strict security rules
+* Managing users, permissions, and services
+* Automating system monitoring with Bash
 
-The goal is to understand how a server is built, secured, administered, and monitored—just like a real production environment.
-
----
-
-## 🔧 Core Configuration Requirements
-
-### 🔹 Operating System
-
-You must choose between:
-
-* **Debian (recommended for beginners)**
-* **Rocky Linux (uses SELinux by default)**
-
-No graphical environment is allowed—this project is fully command-line based.
+The entire setup is done **without any graphical interface**, simulating a real-world production server environment.
 
 ---
 
-### 🔹 Partitioning (LVM + Encryption)
+## ⚙️ Instructions
 
-Create at least **two encrypted partitions** using LVM:
+### 🔹 Virtualization Environment
 
-* Physical Volumes (PV)
-* Volume Group (VG)
-* Logical Volumes (LV)
-
-This teaches how storage is structured and protected on Linux servers.
+* Virtual machine created using **VirtualBox** (or **UTM** if VirtualBox is unavailable)
+* The use of **snapshots is strictly forbidden**
+* Only the file `signature.txt` must be submitted in the Git repository
 
 ---
 
-### 🔹 User & Host Configuration
+### 🔹 Operating System Choice
 
-* Hostname must follow the format: `<login>42`
-* Create a user matching your 42 login
-* Add the user to:
+You must install **one** of the following:
+
+* **Debian (latest stable version)** – recommended for beginners
+* **Rocky Linux (latest stable version)** – more advanced
+
+Restrictions:
+
+* No graphical interface allowed (X.org, Wayland, etc.)
+* Mandatory security framework:
+
+  * **AppArmor** for Debian
+  * **SELinux** for Rocky Linux
+
+---
+
+### 🔹 Disk Partitioning (LVM + Encryption)
+
+* At least **two encrypted partitions** must be created
+* Partitioning must use **LVM**:
+
+  * Physical Volumes (PV)
+  * Volume Groups (VG)
+  * Logical Volumes (LV)
+
+This ensures data security and flexible disk management.
+
+---
+
+### 🔹 Hostname & User Configuration
+
+* Hostname format: `<login>42`
+* A user with your 42 login must be created
+* The user must belong to the following groups:
 
   * `sudo`
   * `user42`
@@ -64,157 +81,158 @@ This teaches how storage is structured and protected on Linux servers.
 
 ### 🔹 Password Policy
 
-A strict password policy must be enforced:
+A strong password policy must be enforced:
 
-* Valid for 30 days
-* 2 days minimum before modification
-* Warning 7 days before expiration
-* At least 10 characters, including uppercase, lowercase, and digits
-* No more than 3 identical consecutive characters
+* Password expires every **30 days**
+* Minimum **2 days** before modification
+* Warning **7 days** before expiration
+* Minimum **10 characters**
+* Must contain:
+
+  * Uppercase letter
+  * Lowercase letter
+  * Number
+* No more than **3 identical consecutive characters**
 * Must not contain the username
+
+⚠️ The root password must also comply with this policy.
 
 ---
 
 ### 🔹 Sudo Configuration
 
-Sudo must be hardened with:
+Sudo must be configured with strict rules:
 
-* Maximum 3 password attempts
-* Custom error message
-* All sudo commands logged to `/var/log/sudo/`
-* TTY mode enabled
-* Restricted PATH
+* Maximum **3 authentication attempts**
+* Custom error message on wrong password
+* All sudo actions logged in `/var/log/sudo/`
+* **TTY mode enabled**
+* Restricted PATH, for example:
+
+```
+/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin
+```
 
 ---
 
 ### 🔹 SSH & Firewall
 
 * SSH must run **only on port 4242**
-* Root login via SSH is forbidden
-* Use a firewall:
+* SSH login as root is **forbidden**
+* Firewall must be active at startup:
 
-  * **UFW** on Debian
-  * **firewalld** on Rocky Linux
-* Only port 4242 should remain open
+  * **UFW** for Debian
+  * **firewalld** for Rocky Linux
+* Only port **4242** must be open (mandatory part)
 
 ---
 
 ### 🔹 Monitoring Script
 
-A Bash script `monitoring.sh` must:
+A Bash script named `monitoring.sh` must:
 
-* Display system information (CPU load, RAM, disk, users, IP, MAC, LVM, etc.)
-* Run automatically every **10 minutes** via cron
-* Broadcast output using `wall`
+* Display system information on all terminals using `wall`
+
+* Run at startup and every **10 minutes** using `cron`
+
+* Show the following information:
+
+* OS architecture and kernel version
+
+* Number of physical CPUs
+
+* Number of virtual CPUs
+
+* RAM usage and percentage
+
+* Disk usage and percentage
+
+* CPU usage percentage
+
+* Last reboot date and time
+
+* LVM status
+
+* Number of active TCP connections
+
+* Number of logged-in users
+
+* IPv4 and MAC address
+
+* Number of sudo commands executed
 
 ---
 
 ## 📂 Project Structure
 
 ```
-Born2beroot/
+Born2beRoot/
 │── signature.txt      # SHA1 signature of the VM disk
-└── monitoring.sh      # Monitoring script
+└── monitoring.sh      # System monitoring script
 ```
 
 ---
 
-## 🛠️ Usage
-
-### Retrieving the VM Signature
-
-Generate the SHA1 hash of your `.vdi` or `.qcow2` file using:
-
-* Linux: `sha1sum disk.vdi`
-* Windows: `certUtil -hashfile disk.vdi sha1`
-* macOS: `shasum disk.vdi`
-
-Place the resulting hash inside **signature.txt**.
-
----
-
-### Activating the Monitoring Script
-
-Add the cron job:
-
-```
-sudo crontab -e
-*/10 * * * * /path/to/monitoring.sh
-```
-
----
-
-## 🧠 Learning Outcomes
-
-Through this project, you learn how to:
-
-✅ Install and manage a Linux server <br>
-✅ Configure encrypted storage with LVM <br>
-✅ Apply strict security and password policies <br>
-✅ Harden sudo and SSH access <br>
-✅ Use firewalls (UFW / firewalld) <br>
-✅ Write automated Bash scripts <br>
-✅ Understand SELinux/AppArmor basics <br>
-✅ Work like a real system administrator
-
----
-
-## ⚙️ Technology Comparisons
+## 🧠 Design Choices & Comparisons
 
 ### Debian vs Rocky Linux
 
-| Feature         | Debian   | Rocky Linux              |
-| --------------- | -------- | ------------------------ |
-| Difficulty      | Easier   | More advanced            |
-| Security        | AppArmor | SELinux                  |
-| Package Manager | apt      | dnf                      |
-| Recommended     | ✔️       | ⚠️ For experienced users |
+| Feature         | Debian            | Rocky Linux |
+| --------------- | ----------------- | ----------- |
+| Difficulty      | Beginner-friendly | Advanced    |
+| Security        | AppArmor          | SELinux     |
+| Package Manager | apt               | dnf         |
+| Recommendation  | ✅                 | ⚠️          |
+
+### AppArmor vs SELinux
+
+* **AppArmor**: Easier to configure, profile-based
+* **SELinux**: More powerful, stricter, policy-based
 
 ### UFW vs firewalld
 
-| UFW                 | firewalld            |
-| ------------------- | -------------------- |
-| Simple and static   | Dynamic and flexible |
-| Ideal for beginners | More advanced        |
+* **UFW**: Simple and static, ideal for beginners
+* **firewalld**: Dynamic and flexible, enterprise-oriented
 
 ### VirtualBox vs UTM
 
-| VirtualBox     | UTM                       |
-| -------------- | ------------------------- |
-| Faster         | Slower (QEMU)             |
-| Multi-platform | macOS-focused             |
-| Easier setup   | More configuration needed |
+* **VirtualBox**: Faster, cross-platform, easier setup
+* **UTM**: macOS-focused, uses QEMU, more configuration required
+
+---
+
+## ⭐ Bonus Part
+
+Possible bonuses include:
+
+* Advanced partitioning scheme
+* Hosting a WordPress website using:
+
+  * lighttpd
+  * MariaDB
+  * PHP
+* Installing an additional useful service (excluding NGINX/Apache2)
+
+⚠️ The bonus is evaluated **only if the mandatory part is perfect**.
 
 ---
 
 ## 📚 Resources
 
-* Debian Handbook
+* Debian Documentation
 * Rocky Linux Documentation
 * AppArmor & SELinux Guides
-* VirtualBox Manual
-* UFW & firewalld documentation
-* LVM official guides
-* Bash manual pages
+* VirtualBox & UTM Manuals
+* LVM Official Documentation
+* Bash & Cron Manuals
+
+## 📦 Submission
+
+* Only `signature.txt` must be submitted
+* The virtual machine must **never** be pushed to Git
+* The SHA1 signature must exactly match the VM disk
+* Snapshots are strictly forbidden
 
 ---
 
-## ✔️ Evaluation Checklist
-
-* [ ] Correct hostname
-* [ ] User + groups configured
-* [ ] Password policy active
-* [ ] Sudo restrictions implemented
-* [ ] SSH on port 4242 only
-* [ ] Firewall active
-* [ ] LVM encrypted partitions created
-* [ ] monitoring.sh functional + cron enabled
-* [ ] signature.txt matches VM disk
-
----
-
-## 🏁 Conclusion
-
-Born2beRoot provides essential exposure to Linux system administration, preparing you for DevOps, cybersecurity, and advanced 42 projects such as Inception and NetPractice.
-
-✨ Thanks for exploring the Born2beRoot project! 🚀
+✨ Thanks for checking out my **Born2beRoot** project! 🚀
