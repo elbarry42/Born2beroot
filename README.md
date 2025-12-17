@@ -1,4 +1,4 @@
-*This project has been created as part of the 42 curriculum by elbarry.*
+*This project has been created as part of the 42 curriculum by elbarry42.*
 
 # Born2beRoot – Building a Secure Linux Server from Scratch 🐧🔐
 
@@ -40,18 +40,19 @@ The entire setup is done **without any graphical interface**, simulating a real-
 
 ### 🔹 Operating System Choice
 
-You must install **one** of the following:
+This project is implemented using **Debian (latest stable version)**.
 
-* **Debian (latest stable version)** – recommended for beginners
-* **Rocky Linux (latest stable version)** – more advanced
+**Why Debian?**
+
+* Beginner-friendly and well-documented
+* Stable release cycle
+* Uses **AppArmor** for mandatory access control
+* Widely used on production servers
 
 Restrictions:
 
 * No graphical interface allowed (X.org, Wayland, etc.)
-* Mandatory security framework:
-
-  * **AppArmor** for Debian
-  * **SELinux** for Rocky Linux
+* **AppArmor must be enabled at startup**
 
 ---
 
@@ -176,6 +177,15 @@ Born2beRoot/
 ## 🧠 Design Choices & Comparisons
 
 ### Debian vs Rocky Linux
+
+This project was completed on **Debian**, chosen for its stability and accessibility for newcomers to system administration.
+
+| Feature         | Debian            | Rocky Linux |
+| --------------- | ----------------- | ----------- |
+| Difficulty      | Beginner-friendly | Advanced    |
+| Security        | AppArmor          | SELinux     |
+| Package Manager | apt               | dnf         |
+| Recommendation  | ✅ Chosen          | ⚠️          |
 
 | Feature         | Debian            | Rocky Linux |
 | --------------- | ----------------- | ----------- |
