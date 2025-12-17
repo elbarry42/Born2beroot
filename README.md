@@ -226,6 +226,13 @@ Possible bonuses include:
 * LVM Official Documentation
 * Bash & Cron Manuals
 
+### 🤖 AI Usage
+
+AI tools were used **only to help structure and improve this README documentation**.
+All system configuration, scripting, and technical decisions were done manually, in compliance with the **42 AI policy**.
+
+---
+
 ## 📦 Submission
 
 * Only `signature.txt` must be submitted
