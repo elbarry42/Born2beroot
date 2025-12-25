@@ -1,4 +1,5 @@
-*This project has been created as part of the 42 curriculum by elbarry.*
+
+This project has been created as part of the 42 curriculum by elbarry.
 
 # Born2beRoot – Building a Secure Linux Server from Scratch 🐧🔐
 
@@ -8,7 +9,7 @@
 
 </div>
 
-Welcome to **Born2beRoot**! 🎉
+Welcome to **Born2beRoot**! 🎉  
 This system administration project introduces the fundamentals of **virtualization**, **Linux server setup**, and **security hardening** by building a fully functional and secure server from scratch.
 
 ---
@@ -46,13 +47,12 @@ This project is implemented using **Debian (latest stable version)**.
 
 * Beginner-friendly and well-documented
 * Stable release cycle
-* Uses **AppArmor** for mandatory access control
 * Widely used on production servers
 
 Restrictions:
 
 * No graphical interface allowed (X.org, Wayland, etc.)
-* **AppArmor must be enabled at startup**
+* AppArmor is available on Debian and may be enabled by default
 
 ---
 
@@ -96,7 +96,7 @@ A strong password policy must be enforced:
 * No more than **3 identical consecutive characters**
 * Must not contain the username
 
-⚠️ The root password must also comply with this policy.
+The policy applies to all users, including root.
 
 ---
 
@@ -108,10 +108,12 @@ Sudo must be configured with strict rules:
 * Custom error message on wrong password
 * All sudo actions logged in `/var/log/sudo/`
 * **TTY mode enabled**
-* Restricted PATH, for example:
+* Restricted PATH:
 
 ```
-/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin
+
+/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
 ```
 
 ---
@@ -124,7 +126,7 @@ Sudo must be configured with strict rules:
 
   * **UFW** for Debian
   * **firewalld** for Rocky Linux
-* Only port **4242** must be open (mandatory part)
+* Only port **4242** is open (mandatory part)
 
 ---
 
@@ -133,43 +135,31 @@ Sudo must be configured with strict rules:
 A Bash script named `monitoring.sh` must:
 
 * Display system information on all terminals using `wall`
-
-* Run at startup and every **10 minutes** using `cron`
-
+* Run **every 10 minutes** using `cron`
 * Show the following information:
 
-* OS architecture and kernel version
-
-* Number of physical CPUs
-
-* Number of virtual CPUs
-
-* RAM usage and percentage
-
-* Disk usage and percentage
-
-* CPU usage percentage
-
-* Last reboot date and time
-
-* LVM status
-
-* Number of active TCP connections
-
-* Number of logged-in users
-
-* IPv4 and MAC address
-
-* Number of sudo commands executed
+  * OS architecture and kernel version
+  * Number of physical CPUs
+  * Number of virtual CPUs
+  * RAM usage and percentage
+  * Disk usage and percentage
+  * CPU usage percentage
+  * Last reboot date and time
+  * LVM status
+  * Number of active TCP connections
+  * Number of logged-in users
+  * IPv4 and MAC address
+  * Number of sudo commands executed
 
 ---
 
 ## 📂 Project Structure
 
 ```
+
 Born2beRoot/
 │── signature.txt      # SHA1 signature of the VM disk
-└── monitoring.sh      # System monitoring script
+
 ```
 
 ---
@@ -186,13 +176,6 @@ This project was completed on **Debian**, chosen for its stability and accessibi
 | Security        | AppArmor          | SELinux     |
 | Package Manager | apt               | dnf         |
 | Recommendation  | ✅ Chosen          | ⚠️          |
-
-| Feature         | Debian            | Rocky Linux |
-| --------------- | ----------------- | ----------- |
-| Difficulty      | Beginner-friendly | Advanced    |
-| Security        | AppArmor          | SELinux     |
-| Package Manager | apt               | dnf         |
-| Recommendation  | ✅                 | ⚠️          |
 
 ### AppArmor vs SELinux
 
@@ -213,17 +196,8 @@ This project was completed on **Debian**, chosen for its stability and accessibi
 
 ## ⭐ Bonus Part
 
-Possible bonuses include:
-
-* Advanced partitioning scheme
-* Hosting a WordPress website using:
-
-  * lighttpd
-  * MariaDB
-  * PHP
-* Installing an additional useful service (excluding NGINX/Apache2)
-
-⚠️ The bonus is evaluated **only if the mandatory part is perfect**.
+The bonus part was **not implemented**.  
+Only the **mandatory part** of the project was completed.
 
 ---
 
@@ -231,15 +205,16 @@ Possible bonuses include:
 
 * Debian Documentation
 * Rocky Linux Documentation
-* AppArmor & SELinux Guides
 * VirtualBox & UTM Manuals
 * LVM Official Documentation
 * Bash & Cron Manuals
 
+---
+
 ### 🤖 AI Usage
 
-AI tools were used **only to help structure and improve this README documentation**.
-All system configuration, scripting, and technical decisions were done manually, in compliance with the **42 AI policy**.
+AI tools were used **only for documentation assistance**.  
+All system configuration and scripting were done manually and fully understood.
 
 ---
 
