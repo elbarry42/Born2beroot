@@ -1,5 +1,4 @@
-
-This project has been created as part of the 42 curriculum by elbarry.
+*This project was completed as part of the 42 curriculum by elbarry.*
 
 # Born2beRoot – Building a Secure Linux Server from Scratch 🐧🔐
 
